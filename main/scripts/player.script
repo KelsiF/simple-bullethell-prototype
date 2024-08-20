@@ -1,0 +1,54 @@
+local right = hash("right")
+local left = hash("left")
+local up = hash("up")
+local down = hash("down")
+local restart = hash("restart")
+
+local speed = 7.5
+
+local onDeath = false
+
+function on_message(self, message_id, message)
+
+	if message_id == hash("trigger_response") then
+		print("collide")
+		msg.post("text#label", "collide")
+		msg.post("enemy#enemy", "collide")
+		onDeath = true
+	end	
+	if message_id == hash("restart") then
+		onDeath = false
+	end
+end
+
+
+function init(self)
+
+	msg.post(".", "acquire_input_focus")
+
+end
+
+function on_input(self, action_id, action)
+	if onDeath == false then
+		if action_id == right then
+			local pos = go.get_position()
+			pos.x = pos.x + speed
+			go.set_position(pos)
+		elseif action_id == left then
+			local pos = go.get_position()
+			pos.x = pos.x - speed
+			go.set_position(pos)
+		elseif action_id == up then
+			local pos = go.get_position()
+			pos.y = pos.y + speed
+			go.set_position(pos)
+		elseif action_id == down then
+			local pos = go.get_position()
+			pos.y = pos.y - speed
+			go.set_position(pos)
+		end
+	end
+	if action_id == restart then
+		msg.post("loader#loader", "load")
+	end
+end

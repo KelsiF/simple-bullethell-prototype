@@ -1,0 +1,13 @@
+function init(self)
+
+	go.set_position(vmath.vector3(-5, -5, 0))
+
+end
+
+function on_message(self, message_id, message)
+
+	if message_id == hash("collide") then
+		go.set_position(vmath.vector3(718, 398, 0))
+	end
+
+end

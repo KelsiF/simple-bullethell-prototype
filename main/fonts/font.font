@@ -1,0 +1,5 @@
+font: "/main/fonts/Milk(RUS BY LYAJKA) Regular.ttf"
+material: "/builtins/fonts/font.material"
+size: 15
+all_chars: true
+characters: " !\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"

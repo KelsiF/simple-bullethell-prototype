@@ -1,0 +1,36 @@
+local function remove()
+	local pos = go.get_position()
+	if pos.y < 1 then
+		go.delete()
+	end
+
+end
+
+local function move()
+
+	local pos = go.get_position()
+	pos.y = pos.y - 10
+	go.set_position(pos)
+	
+end
+
+function init(self)
+
+	timer.delay(1, true, remove)
+	go.set_scale(math.random(5, 20)/10)
+	
+end
+
+function update(self, dt)
+
+	move()
+
+end
+
+function on_message(self, message_id, message)
+
+	if message_id == hash("collision_response") then
+		go.delete()
+	end
+
+end

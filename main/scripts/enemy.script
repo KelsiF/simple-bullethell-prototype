@@ -1,0 +1,70 @@
+local speed = 7.5
+
+local direction = "right"
+local onDeath = false
+
+
+function on_message(self, message_id, message)
+
+	if message_id == hash("collide") then
+		onDeath = true
+	end	
+	if message_id == hash("restart") then
+		onDeath = false
+		direction = "right"
+	end
+end
+
+local function check_direction()
+
+
+	local pos = go.get_position()
+	if pos.x > 0 and pos.x < 50 then
+		direction = "right"
+	elseif pos.x < 970 and pos.x > 900 then
+		direction = "left"
+	end
+	
+end
+
+local function move_right()
+	if onDeath == false then
+		if direction == "right" then
+			local pos = go.get_position()
+			pos.x = pos.x + speed
+			go.set_position(pos)
+		end
+
+	end
+
+end
+
+local function move_left()
+
+	if onDeath == false then
+		if direction == "left" then
+			local pos = go.get_position()
+			pos.x = pos.x - speed
+			go.set_position(pos)
+		end
+	end
+
+end
+
+local function create_bullet()
+	if onDeath == false then
+		local p = go.get_position()
+		local component = "#factory"
+		factory.create(component, p, nil, nil, math.random(1, 2))
+	end
+end
+
+function init(self)
+	
+	timer.delay(math.random(1, 5)/10, true, create_bullet)
+	timer.delay(0.1, true, check_direction)
+
+	timer.delay(0.0, true, move_right)
+	timer.delay(0.0, true, move_left)
+
+end

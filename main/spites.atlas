@@ -1,0 +1,10 @@
+images {
+  image: "/main/sprites/bullet.png"
+}
+images {
+  image: "/main/sprites/enemy.png"
+}
+images {
+  image: "/main/sprites/player.png"
+}
+extrude_borders: 2

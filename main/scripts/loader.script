@@ -1,0 +1,29 @@
+local posEnemy
+local posPlayer
+local posLabel
+
+function init(self)
+
+	posEnemy = go.get_position("enemy")
+	posPlayer = go.get_position("player")
+	posLabel = go.get_position("text")
+	
+end
+
+local function restart()
+	print("restarted")
+	go.set_position(posEnemy, "enemy")
+	go.set_position(posPlayer, "player")
+	go.set_position(posLabel, "text")
+	msg.post("enemy#enemy", "restart")
+	msg.post("player#player", "restart")
+
+end
+
+function on_message(self, message_id, message)
+
+	if message_id == hash("load") then
+		timer.delay(0.25, false, restart)
+	end
+	
+end
